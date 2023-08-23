@@ -1,0 +1,24 @@
+﻿@model Products
+@{
+}
+
+<body dir="rtl" id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
+    <h1>تعديل بيانات المنتج</h1>
+    <form asp-action="UpdateProducts" method="post">
+        <input type="hidden" asp-for="@Model.Id" />
+        <div class="row">
+            <div class="col-sm-12">
+                <label for="ProductName">اسم المنتج</label>
+                <input asp-for="@Model.ProductName" type="text" class="form-control" id="ProductName" name="ProductName" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 d-flex mt-3 justify-content-center">
+                <button type="submit" class="btn btn-primary p-2">حفظ</button>
+            </div>
+        </div>
+    </form>
+</body>
+
+
