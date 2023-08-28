@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dashboard.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230823144935_MyMigration")]
-    partial class MyMigration
+    [Migration("20230826205948_dashboradTable")]
+    partial class dashboradTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

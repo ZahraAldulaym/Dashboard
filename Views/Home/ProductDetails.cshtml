@@ -2,6 +2,7 @@
 @{
 	Layout = "~/Views/Shared/_Layout.cshtml";
 	ViewData["Title"] = "Product Details Page";
+	var ProductDetails = ViewBag.ProductDetails;
 }
 
 <body dir="rtl" id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
@@ -166,36 +167,41 @@
 									</div>
 									<!--begin::Card title-->
 									<!--begin::Card toolbar-->
-									<div class="card-toolbar">
-										<!--begin::Toolbar-->
-										<div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-											<!--begin::Filter-->
-											<div class="w-150px me-3">
-												<!--begin::Select2-->
-												<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Status" data-kt-ecommerce-order-filter="status">
-													<option></option>
-													<option value="all">All</option>
-													<option value="active">Active</option>
-													<option value="locked">Locked</option>
-												</select>
-												<!--end::Select2-->
-											</div>
-											<!--end::Filter-->
-
-											<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"> إضافة تفاصيل منتج </button>
-											<!--end::Add customer-->
-										</div>
-										<!--end::Toolbar-->
-										<!--begin::Group actions-->
-										<div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
-											<div class="fw-bold me-5">
-												<span class="me-2" data-kt-customer-table-select="selected_count"></span>Selected
-											</div>
-											<button type="button" class="btn btn-danger" data-kt-customer-table-select="delete_selected">Delete Selected</button>
-										</div>
-										<!--end::Group actions-->
-									</div>
+									
 									<!--end::Card toolbar-->
+								</div>
+								<div class="card-toolbar">
+									<!--begin::Toolbar-->
+									<div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
+										<!--begin::Filter-->
+										<div class="w-150px me-3">
+											<!--begin::Select2-->
+											<form asp-action="GetProductDetails" method="post">
+												<select class="form-select form-select-solid" onchange="this.form.submit()">
+													<option></option>
+													@foreach (var item in Model)
+													{
+														<option value="@item.Id">@item.ProductName</option>
+													}
+												</select>
+											</form>
+
+											<!--end::Select2-->
+										</div>
+										<!--end::Filter-->
+
+										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"> إضافة تفاصيل منتج </button>
+										<!--end::Add customer-->
+									</div>
+									<!--end::Toolbar-->
+									<!--begin::Group actions-->
+									<div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
+										<div class="fw-bold me-5">
+											<span class="me-2" data-kt-customer-table-select="selected_count"></span>Selected
+										</div>
+										<button type="button" class="btn btn-danger" data-kt-customer-table-select="delete_selected">Delete Selected</button>
+									</div>
+									<!--end::Group actions-->
 								</div>
 								<!--end::Card header-->
 								<!--begin::Card body-->
@@ -207,14 +213,12 @@
 											<!--begin::Table row-->
 											<tr class="text-center text-gray-400 fw-bold fs-7 text-uppercase gs-0">
 
-												<th class="min-w-125px" style="font-family:cairo">رقم المنتج </th>
 												<th class="min-w-125px" style="font-family:cairo"> وصف المنتج </th>
 												<th class="min-w-125px" style="font-family:cairo">السعر </th>
 												<th class="min-w-125px" style="font-family:cairo">  الطراز </th>
 												<th class="min-w-125px" style="font-family:cairo">  الكمية </th>
 												<th class="min-w-125px" style="font-family:cairo">  اللون </th>
 												<th class="min-w-125px" style="font-family:cairo">  الصورة </th>
-												<th class="min-w-125px" style="font-family:cairo">  ملاحظات </th>
 												<th class="min-w-125px" style="font-family:cairo" colspan="2">إجراء </th>
 
 											</tr>
@@ -225,11 +229,15 @@
 										<tbody class="fw-semibold text-gray-600">
 											@if (Model != null)
 											{
-												@foreach (var item in Model)
+												@foreach (var item in ProductDetails)
 												{
 													<tr class="text-center">
-														<td>@item.Id</td>
-														<td>@item.ProductName</td>
+														<td>@item.Description</td>
+														<td>@item.Price</td>
+														<td>@item.Model</td>
+														<td>@item.QTY</td>
+														<td>@item.Color</td>
+														<td>@item.Image</td>
 														<td><a asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a></td>
 														<td><a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a></td>
 													</tr>
@@ -301,12 +309,7 @@
 															</div>
 														</div>
 
-														<div class="row">
-															<div class="col-sm-6">
-																<label for="Display">ملاحظات </label>
-																<input type="text" name="Display" id="Display" class="form-control form-control-sm" />
-															</div>
-														</div>
+														
 													</div>
 												</div>
 											</div>

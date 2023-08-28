@@ -1,5 +1,6 @@
 ﻿using Dashboard.Data;
 using Dashboard.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -17,8 +18,12 @@ namespace Dashboard.Controllers
             this.context = context;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
+            var NameUser = HttpContext.User.Identity.Name;
+            ViewBag.Name = NameUser;
+            
             var product = context.Products.ToList();
 
             return View(product);
@@ -71,7 +76,23 @@ namespace Dashboard.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult ProductDetails() 
+        public IActionResult GetProductDetails(int id)
+        {
+			var ProductDetails = context.ProductDetails.Where(predicate => predicate.Id == id).ToList();
+			ViewBag.ProductDetails = ProductDetails;
+			return RedirectToAction("ProductDetails");
+		}
+
+        [HttpPost]
+		public IActionResult ProductDetails(int id)
+		{
+			var ProductDetails = context.ProductDetails.Where(p => p.ProductId == id).ToList();
+			var product = context.Products.ToList();
+			ViewBag.ProductDetails = ProductDetails;
+			return View(product);
+		}
+
+		public IActionResult ProductDetails() 
         {
 			var product = context.Products.ToList();
             var ProductDetails = context.ProductDetails.ToList();
