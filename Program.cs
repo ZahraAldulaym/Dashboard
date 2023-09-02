@@ -23,8 +23,9 @@ internal class Program
 		builder.Services.AddDefaultIdentity<DashboardUser>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddEntityFrameworkStores<DashboardDbContext>();
 
-	
 		builder.Services.AddRazorPages();
+
+        builder.Services.AddSession();
 
 		var app = builder.Build();
 
@@ -42,11 +43,13 @@ internal class Program
         app.UseRouting();
         app.UseAuthentication();
 
+        app.UseSession();
+
         app.UseAuthorization();
 
         app.MapControllerRoute(
             name: "default",
-            pattern: "{controller=Home}/{action=Index}/{id?}");
+            pattern: "{controller=Shopping}/{action=Index}/{id?}");
         app.MapRazorPages();
         app.UseDeveloperExceptionPage();
         app.Run();

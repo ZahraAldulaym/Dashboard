@@ -3,6 +3,7 @@ using Dashboard.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Diagnostics;
 
 namespace Dashboard.Controllers
@@ -21,12 +22,36 @@ namespace Dashboard.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            var NameUser = HttpContext.User.Identity.Name;
-            ViewBag.Name = NameUser;
+            var Name = HttpContext.User.Identity.Name;
+
+
+            //CookieOptions options = new CookieOptions();
+            //options.Expires = DateTime.Now.AddMinutes(10);
+            //Response.Cookies.Append("Name", Name, options);
+
+            //HttpContext.Session.SetString("Name", Name);
+
+            TempData["Name"] = Name;
+            ViewBag.Name = Name;
             
             var product = context.Products.ToList();
 
             return View(product);
+        }
+
+        public IActionResult PaymentAccept()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult PaymentAccept(PaymentAccept paymentAccept)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
         }
 
         [HttpPost]
@@ -78,7 +103,7 @@ namespace Dashboard.Controllers
 
         public IActionResult GetProductDetails(int id)
         {
-			var ProductDetails = context.ProductDetails.Where(predicate => predicate.Id == id).ToList();
+			var ProductDetails = context.ProductDetails.Where(predicate => predicate.ProductId == id).ToList();
 			ViewBag.ProductDetails = ProductDetails;
 			return RedirectToAction("ProductDetails");
 		}
@@ -91,9 +116,15 @@ namespace Dashboard.Controllers
 			ViewBag.ProductDetails = ProductDetails;
 			return View(product);
 		}
-
 		public IActionResult ProductDetails() 
         {
+            //1-Cookies
+            //ViewBag.Name = Request.Cookies["Name"];
+            //2-Session
+            //ViewBag.Name = HttpContext.Session.GetString("name");
+            //3-TempData
+            ViewBag.Name = TempData["Name"];
+
 			var product = context.Products.ToList();
             var ProductDetails = context.ProductDetails.ToList();
             ViewBag.ProductDetails = ProductDetails;

@@ -2,17 +2,18 @@
 
 namespace Dashboard.Models
 {
-    public class Invoice
+    public class Cart
     {
         [Key]
         public int Id { get; set; }
-        public string CustomerId { get; set; }
+        public string IdCustomer { get; set; }
         public int ProductId { get; set; }
         public string ProductName { get; set; }
         public double Price { get; set; }
-        public int QTY { get; set; }
-        public float Tax { get; set; }
-        public float Discount { get; set; }
+        public string Image { get; set; }
         public double Total { get; set; }
+        public int Qty { get; set; }
+        public string Color { get; set; }
+        public double Tax { get; set; }
     }
 }

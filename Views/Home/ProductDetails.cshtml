@@ -10,7 +10,7 @@
 	<div class="row ">
 		<div class="col-sm-2">
 			<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
-				<!--begin::sidebar-->إضا
+				<!--begin::sidebar-->
 				<div id="kt_app_sidebar" class="app-sidebar flex-column" data-kt-drawer="true" data-kt-drawer-name="app-sidebar" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="225px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
 					<!--begin::Logo-->
 					<div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
@@ -206,11 +206,13 @@
 								<!--end::Card header-->
 								<!--begin::Card body-->
 								<div class="card-body pt-0">
+									<h1> Hi @ViewBag.Name</h1>
 									<!--begin::Table-->
 									<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
 										<!--begin::Table head-->
 										<thead>
 											<!--begin::Table row-->
+
 											<tr class="text-center text-gray-400 fw-bold fs-7 text-uppercase gs-0">
 
 												<th class="min-w-125px" style="font-family:cairo"> وصف المنتج </th>
@@ -232,12 +234,13 @@
 												@foreach (var item in ProductDetails)
 												{
 													<tr class="text-center">
-														<td>@item.Description</td>
+														<td>@item.ProductName</td>
 														<td>@item.Price</td>
 														<td>@item.Model</td>
 														<td>@item.QTY</td>
 														<td>@item.Color</td>
 														<td>@item.Image</td>
+														
 														<td><a asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a></td>
 														<td><a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a></td>
 													</tr>
@@ -275,8 +278,8 @@
 														</select>
 														<div class="row">
 															<div class="col-sm-6">
-																<label for="Description">وصف المنتج</label>
-																<input type="text" name="Description" id="Description" class="form-control form-control-sm" />
+																<label for="ProductName">وصف المنتج</label>
+																<input type="text" name="ProductName" id="ProductName" class="form-control form-control-sm" />
 															</div>
 
 															<div class="col-sm-6">
@@ -307,6 +310,14 @@
 																<label for="Image">الصورة</label>
 																<input type="text" name="Image" id="Image" class="form-control form-control-sm" />
 															</div>
+														</div>
+
+														<div class="row">
+															<div class="col-sm-12">
+																<label for="Color">ملاحظات </label>
+																<input type="text" name="Display" id="Display" class="form-control form-control-sm" />
+															</div>
+
 														</div>
 
 														

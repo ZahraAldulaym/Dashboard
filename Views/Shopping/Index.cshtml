@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Products>
+@{
+    Layout = "~/Views/Shared/_LayoutShopping.cshtml";
+}
+
+    
+        <section style="background-color: #eee;">
+            <div class="container py-5">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-12 col-lg-3 mb-3 mb-lg-3 mt-3">
+                            <div class="card text-black">
+                                <i class="fab fa-apple fa-lg pt-3 pb-1 px-3"></i>
+                                <img src="~/assets/images/@item.Image"
+                                    class="card-img-top" style="width: 100%;" alt="Apple product" />
+
+                                <div class="card-body">
+                                    <div class="text-center">
+                                    <h4 class="card-title" style="font-family:Cairo">@item.ProductName</h4>
+
+                                    <h5 class="mb-1 me-1" style="font-family:Cairo">@item.Price SAR</h5>
+
+                                    <div>
+                                    <a asp-action="ProductDetails" asp-route-id="@item.Id" class="btn btn-primary btn-sm" style="font-family:Cairo">تفاصيل المنتج</a>
+
+                                    </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>            
+                    }
+
+                </div>
+            </div>
+        </section>
+
+
+
+
+
