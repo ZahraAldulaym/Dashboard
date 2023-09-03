@@ -17,7 +17,6 @@ namespace Dashboard.Controllers.Shopping
             _context = context;
         }
 
-        
         public IActionResult ProductDetails(int id)
         {
             var ProductDetails = _context.ProductDetails.Where(p => p.ProductId == id).ToList();

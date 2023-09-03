@@ -69,6 +69,25 @@ namespace Dashboard.Controllers
             return View(product);
         }
 
+        public IActionResult EditDetails(ProductDetails products)
+        {
+            ProductDetails productDetails = context.ProductDetails.SingleOrDefault(x => x.Id == products.Id) ?? new ProductDetails();
+
+            if(productDetails != null)
+            {
+                productDetails.ProductName = products.ProductName;
+                productDetails.Price = products.Price;
+                productDetails.QTY = products.QTY;
+                productDetails.Image = products.Image;
+                productDetails.Model = products.Model;
+                productDetails.Color = products.Color;
+            }
+
+            context.SaveChanges();
+            return RedirectToAction("ProductDetails");
+        }
+
+
         public IActionResult Delete(int id)
 		{
 			var product = context.Products.SingleOrDefault(p => p.Id == id);
@@ -80,7 +99,9 @@ namespace Dashboard.Controllers
 			return RedirectToAction("Index");
 		}
 
-		public IActionResult AddProduct(Products product)
+        
+
+        public IActionResult AddProduct(Products product)
         {
             context.Products.Add(product);
             context.SaveChanges();
