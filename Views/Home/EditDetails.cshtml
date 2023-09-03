@@ -1,5 +1,7 @@
 ﻿@model ProductDetails
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Edit Page";
 }
 
 <body dir="rtl" id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
@@ -23,18 +25,22 @@
             </div>
 
             <div class="col-sm-12">
-                <label for="QTY">الصورة</label>
-                <input asp-for="@Model.QTY" type="text" class="form-control" id="QTY" name="QTY" />
+                <label for="QTY">الكمية</label>
+                <input asp-for="@Model.QTY" type="int" class="form-control" id="QTY" name="QTY" />
             </div>
 
             <div class="col-sm-12">
-                <label for="Model">الصورة</label>
+                <label for="Model">الطراز</label>
                 <input asp-for="@Model.Model" type="text" class="form-control" id="Model" name="Model" />
             </div>
 
             <div class="col-sm-12">
-                <label for="Color">الصورة</label>
+                <label for="Color">اللون</label>
                 <input asp-for="@Model.Color" type="text" class="form-control" id="Color" name="Color" />
+            </div>
+            <div class="col-sm-12">
+                <label for="Display">ملاحظات</label>
+                <input asp-for="@Model.Display" type="text" class="form-control" id="Display" name="Display" />
             </div>
         </div>
 

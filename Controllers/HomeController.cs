@@ -81,12 +81,25 @@ namespace Dashboard.Controllers
                 productDetails.Image = products.Image;
                 productDetails.Model = products.Model;
                 productDetails.Color = products.Color;
-            }
+				productDetails.Display = products.Display;
+			}
+
 
             context.SaveChanges();
             return RedirectToAction("ProductDetails");
         }
 
+        public IActionResult DeleteDetails(int id)
+        {
+            var product = context.ProductDetails.SingleOrDefault(x => x.Id == id);
+            if (product != null)
+            {
+                context.ProductDetails.Remove(product);
+                context.SaveChanges();
+            }
+            return RedirectToAction("ProductDetails");
+        
+        }
 
         public IActionResult Delete(int id)
 		{

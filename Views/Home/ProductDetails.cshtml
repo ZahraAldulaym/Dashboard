@@ -239,8 +239,8 @@
 														<td>@item.QTY</td>
 														<td>@item.Color</td>
 														<td>@item.Image</td>
-														
-														<td><a asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a></td>
+
+														<td><a asp-action="DeleteDetails" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a></td>
 														<td><a asp-action="EditDetails" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a></td>
 													</tr>
 												}
@@ -313,7 +313,7 @@
 
 														<div class="row">
 															<div class="col-sm-12">
-																<label for="Color">ملاحظات </label>
+																<label for="Display">ملاحظات </label>
 																<input type="text" name="Display" id="Display" class="form-control form-control-sm" />
 															</div>
 
